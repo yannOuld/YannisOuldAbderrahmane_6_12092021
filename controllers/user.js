@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.js');
 
-
+// module pour s'inscrire dans la base de données et hash du mot de passe avec bcrypt
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
@@ -18,7 +18,7 @@ exports.signup = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 
-
+// module pour s'identifier et obtenir un token de connection valable 24h la clé d'encodage du token étant dans un fichier environnement 
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
         .then(user => {

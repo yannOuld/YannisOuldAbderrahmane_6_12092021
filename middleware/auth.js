@@ -6,10 +6,10 @@ module.exports = (req, res, next) => {
         console.log(header);
         const decodedToken = jwt.verify(token, process.env.ACCES_TOKEN_SECRET);
         req.reqdata = decodedToken;
-        console.log(decodedToken);
-        if (!req.reqdata.userId) {
+        if (req.body.userId && req.body.userId !== userId) {
             throw ' Invalid user ID';
         } else {
+
             next();
         }
     }
