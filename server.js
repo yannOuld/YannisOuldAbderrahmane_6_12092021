@@ -1,6 +1,7 @@
+require('dotenv');
+
 // package HTTP de node.js
 const http = require('http');
-
 
 // import de l'application app.js
 const app = require('./app');
