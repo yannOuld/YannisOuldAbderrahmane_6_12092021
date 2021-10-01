@@ -112,8 +112,9 @@ exports.likesDislikes = (req, res, next) => {
                             .then(() => res.statut(200).json({ message: 'unliked' }))
                             .catch(error => res.status(400).json({ error }));
 
-                    } else if (sauce.usersDisliked.includes(req.body.userId)) {
-                        SauceModel.updateOne({ _id: req.params.id, $pull: { usersLiked: req.body.userId }, $inc: { dislikes: - 1 } })
+                    };
+                    if (sauce.usersDisliked.includes(req.body.userId)) {
+                        SauceModel.updateOne({ _id: req.params.id, $pull: { usersDisliked: req.body.userId }, $inc: { dislikes: - 1 } })
                             .then(() => res.statut(200).json({ message: 'unliked' }))
                             .catch((error) => {
                                 console.log(error);
