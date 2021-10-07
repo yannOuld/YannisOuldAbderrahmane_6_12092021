@@ -1,4 +1,5 @@
 require('./manager/mongodb.js');
+const rateLimit = require("express-rate-limit");
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require("morgan");
@@ -19,6 +20,14 @@ app.use(helmet());
 
 // body parser gerer le content type et l'utilisation de middleware
 app.use(bodyParser.json());
+
+// empecher le nombre de requêtes d'être trop important 
+const apiLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100
+});
+
+app.use("/api/", apiLimiter);
 
 // transferer les données a dans l'url de maniere securisé
 app.use(bodyParser.urlencoded({ extended: true }));

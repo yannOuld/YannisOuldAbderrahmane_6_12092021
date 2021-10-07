@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
-const authConfig = require('../configs/auth.config.js');
+require('dotenv/config');
+
 
 // authentification à la base de données !!!  les identifiant sont sur un fichier secret  connecté vous a votre propre base de donnée mongoDB Atlas !!!
-mongoose.connect(`mongodb+srv://${authConfig.name}:${authConfig.password}@${authConfig.cluster}/${authConfig.database}?retryWrites=true&w=majority`,
+mongoose.connect(process.env.MONGO_ACCES,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
